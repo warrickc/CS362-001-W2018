@@ -1,0 +1,28 @@
+Bug 1:
+After running my random tests, I got a weird error in one of the random tests.
+I initially had no idea why a divide by 0 error would have come up in the CalendarUtil class. 
+I know that I didn’t change anything in my code for introducing bugs, so I figured it may have been an introduced bug. 
+So, I then decided to take a look at the code itself. After going line by line, I'm trying to see if there could possibly be a divide by 0 anywhere.
+On line 50 in CalendarUtil.java, there is a declaration of int x = 5/0, which would cause the error if the year was ever set to 2400. 
+I don’t believe I would have ever caught this bug if it wasn’t for random testing. 
+Since random testing runs over 30000 times, it was a pretty good shot to hit year 2400, but still semi-lucky.
+
+Bug 2:
+This next bug I found when I was looking at the code coverage of my random test cases on my partner’s faulty code. 
+I knew what my code’s coverage looked like so I had some sort of a base line. 
+I looked at the Jacoco code coverage report and after going through most of the code, I noticed in TimeTable had some generally crappy coverage 
+and that getApptOccurences had some really crappy coverage. 
+I knew that getApptOccurences had upwards of 90%+ coverage from my test cases in the random tests, so what was going on here? 
+Because of the deviation from the baseline, I decided to look at the code a little bit more.
+I then saw that iterator never has a next from the object created on line 56, apptOccursOnDays. 
+Additionally, apptOccursOnDays is built incorrectly. It calls firstDay, firstDay instead of firstDay, lastDay. 
+What this will do will create a list of only 1 object every time, instead of enumerating all of the appointments during the set date spread, 
+thus leading to not being able to use has.Next() on the iterator.
+	
+
+
+
+
+
+
+
